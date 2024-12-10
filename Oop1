@@ -1,0 +1,55 @@
+#include <iostream>
+using namespace std;
+class complex{
+    private:
+        double r;
+        double i;
+    public:
+        complex(){
+            r=0;
+            i=0;
+        }
+        complex operator + (complex &c){
+            complex t;
+            t.r = r + c.r;
+            t.i = i + c.i;
+            return t;
+        }
+        complex operator * (complex &c){
+            complex t;
+            t.r = (r*c.r)-(i*c.i);
+            t.i = (r*c.i)+(i*c.r);
+            return t;
+        }
+        friend istream &operator >> (istream &in , complex &c);
+        friend ostream &operator << (ostream &out , complex &c);
+};
+istream &operator >> (istream &in , complex &c){
+    cout<<"Enter the real part : ";
+    in>>c.r;
+    cout<<"Enter imaginary part : ";
+    in>>c.i;
+}
+ostream &operator << (ostream &out , complex &c){
+    out<<c.r<<"+"<<c.i<<"i\n";
+}
+int main() {
+    complex c1,c2,c3,c4;
+        cout<<"Default constructor value=\n";
+        cout<<c1;
+    cout<<"\nEnter the 1st number\n";
+    cin>>c1;
+    cout<<"\nEnter the 2nd number\n";
+    cin>>c2;
+    c3=c1+c2;
+    c4=c1*c2;
+    cout<<"\nThe first number is ";
+    cout<<c1;
+    cout<<"\nThe second number is ";
+    cout<<c2;
+    cout<<"\nThe addition is ";
+    cout<<c3;
+    cout<<"\nThe multiplication is ";
+    cout<<c4;
+    return 0;
+}

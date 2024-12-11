@@ -1,0 +1,100 @@
+#include <iostream>
+using namespace std;
+class publication{
+    public:
+        string title;
+        float price;
+    
+        publication(){
+            title = "";
+            price = 0.0;
+        }
+        void setData(){
+            cout << "Enter Title of Publication : " ;
+            cin>>title;
+            try{
+                cout<<"Enter the price : ";
+                cin >> price;
+                if (price<0){
+                    throw price;
+                }
+            }
+            catch(float p){
+                cout << "An exception has occured , resetting all values to default"<<endl;
+                title="";
+                price=0.0;
+            }
+        }
+};
+class book : public publication{
+    int pages;
+    public:
+    book(){
+        pages=0;
+    }
+    void bookData(){
+        setData();
+        cout << "Enter the number of pages : ";
+        try{
+            
+            cin>>pages;
+            if(pages<0){
+                throw pages;
+            }
+        }
+        catch(int p){
+            cout<<"An exception has occured resetting all values to default"<<endl;
+            title = "";
+            price = 0.0;
+            pages = 0;
+        }
+    }
+    void displayBook(){
+        cout<<"\n Title : "<<title<<"\n Price : "<<price<<"\n Pages : "<<pages<<endl;
+    }
+};
+class tape : public publication{
+    float mins;
+    public:
+    tape(){
+        mins = 0.0;
+    }
+    void tapeData(){
+        setData();
+        cout << "Enter the playtime of the tape : ";
+        try{
+            
+            cin>>mins;
+            if(mins<0){
+                throw mins;
+            }
+        }
+        catch(float m){
+            cout<<"An exception has occured resetting all values to default"<<endl;
+            title = "";
+            price = 0.0;
+            mins = 0.0;
+        }
+    }
+    void displayTape(){
+        cout<<"\n Title : "<<title<<"\n Price : "<<price<<"\n Play time : "<<mins;
+
+    }   
+};
+int main(){
+    book b;
+    tape t;
+    cout<<"Enter data for Book : "<<endl;
+    b.bookData();
+    cout<<"Enter data for tape : "<<endl;
+    t.tapeData();
+    b.displayBook();
+    t.displayTape();
+    return 0;
+}
+
+
+
+
+
+

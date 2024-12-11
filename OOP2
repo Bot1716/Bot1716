@@ -1,0 +1,107 @@
+#include <iostream>
+#include <string>
+using namespace std;
+class student;
+class person{
+    private:
+        string name,blo,add;
+        int tele,dlo,dob;
+    public:
+        friend class student;
+        person(){
+            name="";
+            blo="";
+            add="";
+            tele=0;
+            dlo=0;
+            dob=0;
+        }
+        person(const person &p){
+            name=p.name,blo=p.blo,add=p.add,tele=p.tele,dlo=p.dlo,dob=p.dob;
+        }
+        person(string name){
+            this->name = name;
+        }
+};
+class student{
+    private:
+        int roll;
+        string cn;
+        char *div;
+        char d;
+    public:
+    static int count;
+        student(){
+            person();
+            roll=0;
+            cn="";
+            div=NULL;
+            count++;
+        }
+        void acceptStudent(person &p){
+            cout<<"Enter your name : "<<endl;
+            cin>>p.name;
+            cout<<"Enter your Blood group : "<<endl;
+            cin>>p.blo;
+            cout<<"Enter your Address : "<<endl;
+            cin>>p.add;
+            cout<<"Enter your Telephone Number : "<<endl;
+            cin>>p.tele;
+            cout<<"Enter your License Number : "<<endl;
+            cin>>p.dlo;
+            cout<<"Enter your Date of birth : "<<endl;
+            cin>>p.dob;
+            cout<<"Enter your Roll Number : "<<endl;
+            cin>>roll;
+            cout<<"Enter your Class Name : "<<endl;
+            cin>>cn;
+            cout<<"Enter your Division : "<<endl;
+            cin>>d;
+            div = &d;
+        }
+        void displayStudent(person &p){
+            cout<<"\nName : "<<p.name;
+            cout<<"\nBlood Group : "<<p.blo;
+            cout<<"\nAddress : "<<p.add;
+            cout<<"\nTelephone Number : "<<p.tele;
+            cout<<"\nLicense Number : "<<p.dlo;
+            cout<<"\nDate of birth : "<<p.dob;
+            cout<<"\nRoll number : "<<roll;
+            cout<<"\nClass name : "<<cn;
+            cout<<"\nDivsion : "<<div;
+            cout<<endl;
+            }
+        ~student(){
+            delete (div);
+        }
+        static int get(){
+            return count;
+        }
+};
+int student :: count=0;
+int main(){
+    person *p[10];
+    student *s[10];
+    int f=0;
+    while(1){
+        int ch;
+        cout<<"Enter your choice : "<<"\n 1 : Enter student data |  2 : Display student data | 3 : EXIT "<< endl;
+        cin>>ch;
+        if(ch==1){
+            s[f]=new student();
+            p[f]=new person();
+            s[f]->acceptStudent(*p[f]);
+            f++;
+        }
+        else if(ch==2){
+            for(int i = 0;i<f;i++){
+                s[i]->displayStudent(*p[i]);
+            }
+        }
+        else if(ch==3){
+            cout<<"Exited "<<endl;
+            break;
+        }
+    }
+    return 0;
+}

@@ -29,9 +29,11 @@ istream &operator >> (istream &in , complex &c){
     in>>c.r;
     cout<<"Enter imaginary part : ";
     in>>c.i;
+    return in;
 }
 ostream &operator << (ostream &out , complex &c){
     out<<c.r<<"+"<<c.i<<"i\n";
+    return out;
 }
 int main() {
     complex c1,c2,c3,c4;

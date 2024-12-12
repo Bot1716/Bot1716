@@ -1,0 +1,70 @@
+#include<iostream>
+#include<fstream>
+using namespace std;
+class student{              
+private:
+    string name;
+    int roll;
+public:
+    void add_info(){
+        fstream fs;
+        fs.open("D:\\temp\\sample.txt",ios::app);
+        if(!fs){
+            cout<<"Error in openinf file for writing"<<endl;
+        }
+        else{
+            cout<<"File opened"<<endl;
+            cout<<"Enter name : ";
+            cin>>name;
+            cout << "Enter roll number : ";
+            cin>>roll;
+            fs<<name<<" ";
+            fs<<roll<<"\n";
+            fs.close();
+        }
+    }
+    void disp_info(){
+        fstream fs;
+        fs.open("D:\\temp\\sample.txt",ios::in);
+        if(!fs){
+            cout << "No such file :";
+        }
+        else{
+            while(!fs.eof()){
+                fs >> name;
+                fs >> roll;
+                    cout << name<<" ";
+                    cout << roll << " ";
+                    cout<<"\n";
+            }
+            fs.close();
+        }
+    }
+};
+int main()
+{
+    int ch;
+    student s;
+    fstream fs;
+    do{
+        cout<<"\n*** Student information system ***";
+        cout<<"\n*** Menu ***";
+        cout<<"\n 1. Add Information";
+        cout<<"\n 2. Display Information";
+        cout<<"\n 3. EXIT";
+        cout<<"\n Enter choice";
+        cin>>ch;
+        switch(ch){
+            case 1:
+                s.add_info();
+                break;
+            
+            case 2:
+                s.disp_info();
+                break;
+            case 3:
+                exit(0);
+        }
+    }while(ch!=3);
+    return 0;
+}

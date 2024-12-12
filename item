@@ -1,0 +1,50 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+#include<string>
+using namespace std;
+struct Item{
+    int code;
+    string name;
+    double cost;
+    int qty;
+};
+bool compareItems(const Item &a, const Item &b){
+    return a.cost<b.cost;
+}
+int main(){
+    vector<Item> i1;
+    int ni;
+    cout << "Enter no. of Items : ";
+    cin>>ni;
+    for(int i = 0 ; i < ni ; ++i){
+        Item it;
+        cout<<"Enter Details for Item "<<i+1<<endl;
+        cout << "Code : ";
+        cin>>it.code;
+        cout << "Name : ";
+        cin>>it.name;
+        cout << "Cost : ";
+        cin>>it.cost;
+        cout << "Quantity : ";
+        cin>>it.qty;
+        i1.push_back(it);
+    }
+    sort(i1.begin(),i1.end(),compareItems);
+    cout<<"\nSorted items by cost : \n";
+    for(const auto &it : i1){
+        cout<<"Item code : "<<it.code<<" Item Name : "<<it.name<<" Item cost : "<<it.cost<<" Item Quantity : "<<it.qty<<endl;
+    }
+    int search;
+    cout<<"Enter item code to search :";
+    cin>>search;
+    auto itemIt = find_if(i1.begin(),i1.end(),[&](const Item &it){
+        return it.code==search;
+    });
+    if(itemIt != i1.end()){
+        cout << "Item found : Item code"<<itemIt->code<<" , Name : "<<itemIt->name<<" , Cost : "<<itemIt->cost<<" , Quantity : "<<itemIt->qty;
+    }else{
+        cout<<"Item with code "<<search<<" not found!"<<endl;
+    }
+    return 0;
+}
